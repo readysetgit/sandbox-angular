@@ -169,19 +169,21 @@ export class AppComponent {
           .append("rect")
               .attr("height", 0)
               .attr("y", y(0))
+              .attr("x", function(d){return x(d.name)})
+              .attr("fill", "green")
           .transition(t)
               .attr("y", function (d){return y(d.height)})
               .attr("x", function(d, i){return x(d.name);})
               .attr("width", x.bandwidth)
               .attr("height", function(d){return height - y(d.height)})
-              .attr("fill", function(d){return "grey"});
+              // .attr("fill", function(d){return "grey"});
     }
   }
 
   
   makeCircles(){
     //---------------------------Scaling-------------------   
-    let t = d3.transition().duration(350)
+    let t = d3.transition().duration(450)
     let x = d3.scaleLinear()
     .domain([0,998])
     .range([0,100])
