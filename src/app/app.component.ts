@@ -162,7 +162,7 @@ export class AppComponent {
           .attr("x", function(d, i){return x(d.name);})
           .attr("width", x.bandwidth)
           .attr("height", function(d){return height - y(d.height)})
-          .attr("fill", function(d){return "grey"});
+          .attr("fill", function(d){return "orange"});
       
       //ENTER new elements present in new data 
       rects.enter()
@@ -170,13 +170,13 @@ export class AppComponent {
               .attr("height", 0)
               .attr("y", y(0))
               .attr("x", function(d){return x(d.name)})
-              .attr("fill", "green")
+              .attr("fill", "grey")
           .transition(t)
               .attr("y", function (d){return y(d.height)})
               .attr("x", function(d, i){return x(d.name);})
               .attr("width", x.bandwidth)
               .attr("height", function(d){return height - y(d.height)})
-              // .attr("fill", function(d){return "grey"});
+              .attr("fill", function(d){return "green"});
     }
   }
 
