@@ -27,73 +27,15 @@ export class AppComponent {
     // this.makeCircles();
     this.makeBarChart();
     let i = 1 
+    let sign = 1
+
     setInterval(() =>{
-      
-      this.updatingList.push({"name":`bleh${i}`,"height":1200})   
+      sign = -sign
+      let heightOffset = sign*500*Math.random()
+      this.updatingList.push({"name":`bleh${i}`,"height":1200 + heightOffset})   
       i++
       this.updatingList = this.updatingList.slice(1,this.updatingList.length)
     },1000)
-  }
-
-
-  makeCircles(){
- //---------------------------Scaling-------------------   
- let t = d3.transition().duration(350)
- let x = d3.scaleLinear()
- .domain([0,998])
- .range([0,100])
-
-let y = d3.scaleLog()
- .domain([1,998])
- .range([0,100])
- .base(10)
-
-
-let z = d3.scaleOrdinal()
- .domain([
-   "Africa"
- ])
- .range(["red","blue"])
-
-let bb = d3.scaleBand()
- .domain([
-   "Africa","US","India"
- ])
- .range([0,100])
- .paddingInner(0.3)
- .paddingOuter(0.2)
-
- console.log(bb("India"))
- console.log(bb.bandwidth())
-
-console.log(x(349))
-console.log(y(349))
-console.log(z("Africa"))
-
-//-------------------------------------------------------
-let svg = d3.select("#canvas")
- .append("svg")
-   .attr("width", 400)
-   .attr("height", 400);
-
- svg
- .append("circle")
- .transition(t)
-   .attr("cx", 200)
-   .attr("cy", 200)
-   .attr("r", 10)
-   .attr("fill", "red");
-
-let circles = svg.selectAll("circle")
-     .data(this.list)
-
- circles.enter()
-     .append("circle")
-      .transition(t)
-       .attr("cx", (d,i) => i*30 + 30)
-       .attr("cy", 200)
-       .attr("r", (d,i) => d*i)
-       .attr("fill", "blue");
   }
 
 
@@ -236,5 +178,65 @@ let circles = svg.selectAll("circle")
     }
   }
 
+  
+  makeCircles(){
+    //---------------------------Scaling-------------------   
+    let t = d3.transition().duration(350)
+    let x = d3.scaleLinear()
+    .domain([0,998])
+    .range([0,100])
+   
+   let y = d3.scaleLog()
+    .domain([1,998])
+    .range([0,100])
+    .base(10)
+   
+   
+   let z = d3.scaleOrdinal()
+    .domain([
+      "Africa"
+    ])
+    .range(["red","blue"])
+   
+   let bb = d3.scaleBand()
+    .domain([
+      "Africa","US","India"
+    ])
+    .range([0,100])
+    .paddingInner(0.3)
+    .paddingOuter(0.2)
+   
+    console.log(bb("India"))
+    console.log(bb.bandwidth())
+   
+   console.log(x(349))
+   console.log(y(349))
+   console.log(z("Africa"))
+   
+   //-------------------------------------------------------
+   let svg = d3.select("#canvas")
+    .append("svg")
+      .attr("width", 400)
+      .attr("height", 400);
+   
+    svg
+    .append("circle")
+    .transition(t)
+      .attr("cx", 200)
+      .attr("cy", 200)
+      .attr("r", 10)
+      .attr("fill", "red");
+   
+   let circles = svg.selectAll("circle")
+        .data(this.list)
+   
+    circles.enter()
+        .append("circle")
+         .transition(t)
+          .attr("cx", (d,i) => i*30 + 30)
+          .attr("cy", 200)
+          .attr("r", (d,i) => d*i)
+          .attr("fill", "blue");
+     }
 
 }
